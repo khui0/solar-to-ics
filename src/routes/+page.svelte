@@ -86,23 +86,38 @@
           {item.from} - {item.to}
         </p>
         <p>{item.location.precise} - {item.location.general}</p>
+        <p>{item.instructors.join(", ")}</p>
       </li>
     {/each}
   </ul>
+  <p class="text-xs text-base-content/50">
+    If something looks wrong, feel free to reach out to <a
+      class="link"
+      href="mailto:support@kennyhui.dev">support@kennyhui.dev</a
+    > with your copied text or open a pull request if you know what you're doing!
+  </p>
   <h2 class="text-xl font-bold">When's the last day of classes?</h2>
-  <a
-    class="link"
-    href="https://www.stonybrook.edu/commcms/registrar/calendars/academic_calendars"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Stony Brook University Academic Calendars
-  </a>
+  <p>
+    We've filled in our best guess, but be sure to check the <a
+      class="link"
+      href="https://www.stonybrook.edu/commcms/registrar/calendars/academic_calendars"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Stony Brook University Academic Calendars
+    </a> for up to date information.
+  </p>
   <input class="input" type="date" bind:value={date} />
   <button class="btn" onclick={download}>Download Static iCalendar File</button>
   <section class="text-xs text-base-content/50">
     <p>
-      For Apple Calendar, open the <code>.ics</code> file on your Apple device. <a class="link" href="https://support.apple.com/guide/calendar/import-or-export-calendars-icl1023/mac" target="_blank" rel="noopener noreferrer">Need more help?</a>
+      For Apple Calendar, open the <code>.ics</code> file on your Apple device.
+      <a
+        class="link"
+        href="https://support.apple.com/guide/calendar/import-or-export-calendars-icl1023/mac"
+        target="_blank"
+        rel="noopener noreferrer">Need more help?</a
+      >
     </p>
     <p>
       For Google Calendar, <a
