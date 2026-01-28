@@ -36,7 +36,7 @@
 </script>
 
 <h1 class="text-2xl font-bold">SOLAR to iCalendar</h1>
-<ol class="list-decimal pl-8">
+<ol class="list-inside list-decimal space-y-1">
   <li>
     <a
       class="link"
@@ -71,7 +71,14 @@
     {/each}
   </ul>
   <h2 class="text-xl font-bold">When's the last day of classes?</h2>
-  <a class="link" href="https://www.stonybrook.edu/commcms/registrar/calendars/academic_calendars" target="_blank" rel="noopener noreferrer">Stony Brook University Academic Calendars</a>
+  <a
+    class="link"
+    href="https://www.stonybrook.edu/commcms/registrar/calendars/academic_calendars"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Stony Brook University Academic Calendars
+  </a>
   <input class="input" type="date" bind:value={date} />
   <button class="btn" onclick={download}>Download Static Calendar</button>
 {/if}
