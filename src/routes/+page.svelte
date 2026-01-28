@@ -100,6 +100,19 @@
   </a>
   <input class="input" type="date" bind:value={date} />
   <button class="btn" onclick={download}>Download Static iCalendar File</button>
+  <section class="text-xs text-base-content/50">
+    <p>
+      For Apple Calendar, open the <code>.ics</code> file on your Apple device. <a class="link" href="https://support.apple.com/guide/calendar/import-or-export-calendars-icl1023/mac" target="_blank" rel="noopener noreferrer">Need more help?</a>
+    </p>
+    <p>
+      For Google Calendar, <a
+        class="link"
+        href="https://support.google.com/calendar/answer/37118"
+        target="_blank"
+        rel="noopener noreferrer">learn how to import events</a
+      >
+    </p>
+  </section>
 {:else}
   <p class="text-xs text-base-content/50">
     If nothing happens, make sure you followed the above steps correctly. Feel free to reach out to <a
