@@ -35,7 +35,17 @@
   }
 </script>
 
-<h1 class="text-2xl font-bold">SOLAR to iCalendar</h1>
+<header class="flex justify-between items-center">
+  <h1 class="text-2xl font-bold">SOLAR to iCalendar</h1>
+  <a
+    class="link"
+    href="https://github.com/khui0/solar-to-ics"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    GitHub
+  </a>
+</header>
 <ol class="list-inside list-decimal space-y-1">
   <li>
     <a

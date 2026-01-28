@@ -37,5 +37,5 @@
 }
 
 code {
-  @apply bg-base-300;
+  @apply bg-base-200 border border-base-300 px-1.5 rounded-sm text-sm;
 }
