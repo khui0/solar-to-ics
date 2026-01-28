@@ -20,6 +20,7 @@
     "@sveltejs/kit": "^2.50.1",
     "@sveltejs/vite-plugin-svelte": "^6.2.4",
     "@tailwindcss/vite": "^4.1.18",
+    "@types/file-saver": "^2.0.7",
     "@types/node": "^22",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
@@ -34,5 +35,11 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.53.1",
     "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "daisyui": "^5.5.14",
+    "dayjs": "^1.11.19",
+    "file-saver": "^2.0.5",
+    "ics": "^3.8.1"
   }
 }
