@@ -35,7 +35,7 @@
   }
 </script>
 
-<header class="flex justify-between items-center">
+<header class="flex items-center justify-between">
   <h1 class="text-2xl font-bold">SOLAR to iCalendar</h1>
   <a
     class="link"
@@ -46,6 +46,14 @@
     GitHub
   </a>
 </header>
+<section class="rounded-field border border-base-300 px-3 py-2">
+  <h2 class="tex font-bold">What is this?</h2>
+  <p class="text-sm">
+    This tool takes your SBU class schedule and turns it into a file you can import into Apple
+    Calendar, Google Calendar, or any other calendar software.
+  </p>
+</section>
+<h2 class="text-xl font-bold">Getting started</h2>
 <ol class="list-inside list-decimal space-y-1">
   <li>
     <a
@@ -65,13 +73,14 @@
   <li><kbd class="kbd">{ctrlKeyString}</kbd> + <kbd class="kbd">C</kbd> Copy</li>
   <li>Paste into the textbox below</li>
 </ol>
-<textarea class="textarea resize-none" bind:value={input}></textarea>
+<textarea class="textarea resize-none" bind:value={input} placeholder="Paste your text here..."
+></textarea>
 {#if schedule !== null}
   <h2 class="text-xl font-bold">Does this look correct?</h2>
   <ul class="flex flex-col gap-2">
     {#each schedule as item}
       <li>
-        <h3 class="font-bold">{item.name} ({item.type})</h3>
+        <h3 class="font-bold">{item.name} ({item.type.toUpperCase()})</h3>
         <p>
           {daysHumanReadable(item.days)}
           {item.from} - {item.to}
@@ -90,5 +99,12 @@
     Stony Brook University Academic Calendars
   </a>
   <input class="input" type="date" bind:value={date} />
-  <button class="btn" onclick={download}>Download Static Calendar</button>
+  <button class="btn" onclick={download}>Download Static iCalendar File</button>
+{:else}
+  <p class="text-xs text-base-content/50">
+    If nothing happens, make sure you followed the above steps correctly. Feel free to reach out to <a
+      class="link"
+      href="mailto:support@kennyhui.dev">support@kennyhui.dev</a
+    > for help.
+  </p>
 {/if}
