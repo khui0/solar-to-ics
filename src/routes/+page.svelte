@@ -1,9 +1,10 @@
 <script lang="ts">
   import { parse, type CalendarEvent } from "$lib/solar";
-  import { ctrlKeyString, daysHumanReadable } from "$lib/utilities";
+  import { ctrlKeyString, daysHumanReadable, getLastDay, save, toICS } from "$lib/utilities";
   import { onMount } from "svelte";
 
   let input: string = $state("");
+  let date: string = $state(getLastDay());
   let schedule: CalendarEvent[] | null = $state(null);
 
   onMount(async () => {
@@ -23,7 +24,15 @@
     }
   });
 
-  $inspect(schedule);
+  function download() {
+    if (schedule === null) return;
+    const ics = toICS(schedule, date);
+    if (ics === null) {
+      alert("Error generating ICS file");
+      return;
+    }
+    save(ics);
+  }
 </script>
 
 <h1 class="text-2xl font-bold">SOLAR to iCalendar</h1>
@@ -61,6 +70,7 @@
       </li>
     {/each}
   </ul>
-
-  <button class="btn">Download Static Calendar</button>
+  <h2 class="text-xl font-bold">When's the last day of classes?</h2>
+  <input class="input" type="date" bind:value={date} />
+  <button class="btn" onclick={download}>Download Static Calendar</button>
 {/if}

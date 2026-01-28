@@ -57,21 +57,20 @@ function getNthWeekday(month: number, n: number, weekday: number) {
   return firstOccurrence.add(n - 1, "week").get("date");
 }
 
-export function toICS(
-  schedule: CalendarEvent[],
-  lastDay: string = getLastDay(),
-): string | undefined {
+export function toICS(schedule: CalendarEvent[], lastDay: string = getLastDay()): string | null {
   const events = schedule
     ?.filter((event) => !event.online)
     .map((event: CalendarEvent) => {
       const hours = parseInt(event.from.split(":")[0]);
       const minutes = parseInt(event.from.split(":")[1]);
       const start = startDate(event.days);
+      console.log(event.days);
       const result: EventAttributes = {
         start: [start.year, start.month, start.day, hours, minutes],
+        startInputType: "local",
         startOutputType: "local",
         duration: duration(event.from, event.to),
-        title: event.name,
+        title: `${event.name} (${event.type.toUpperCase()})`,
         description: event.type.toUpperCase(),
         recurrenceRule: rrule(event.days, lastDay),
         productId: "-//KENNYHUI//NONSGML kennyhui.dev//EN",
@@ -82,7 +81,7 @@ export function toICS(
       return result;
     });
 
-  return ics.createEvents(events).value;
+  return ics.createEvents(events).value || null;
 }
 
 function duration(from: string, to: string): DurationObject {
@@ -99,7 +98,7 @@ function rrule(days: boolean[], lastDay: string) {
   const until = dayjs(lastDay)
     .toISOString()
     .replace(/(\.000)|[-,:]/g, "");
-  const strings = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
+  const strings = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
   const array = strings.filter((_, i) => days[i]);
   return `FREQ=WEEKLY;BYDAY=${array.join(",")};INTERVAL=1;UNTIL=${until}`;
 }
@@ -107,8 +106,7 @@ function rrule(days: boolean[], lastDay: string) {
 function startDate(days: boolean[]) {
   const index = days.findIndex(Boolean);
 
-  const targetDay = (index + 1) % 7;
-  const date = dayjs().day(targetDay);
+  const date = dayjs().day(index);
 
   return {
     year: date.year(),
