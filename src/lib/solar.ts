@@ -8,6 +8,7 @@ export interface CalendarEvent {
     general: string;
     precise: string;
   };
+  instructors: string[];
   online: boolean;
 }
 
@@ -54,6 +55,18 @@ export function parse(data: string): CalendarEvent[] | null {
       const generalLocation = preciseLocation?.[1].trim() || null;
       const online = generalLocation === null || preciseLocation === null;
 
+      // Get list of instructors
+      const instructors = [];
+      let initial = index + 5;
+      try {
+        do {
+          instructors.push(item[initial].replace(/,$/, ""));
+          initial++;
+        } while (item[initial - 1].endsWith(","));
+      } catch {
+        console.error("Unable to parse instructors");
+      }
+
       // Log parsed event to console
       // console.log("Found", courses[i], type, times, preciseLocation, generalLocation, online);
       // Push to schedule
@@ -67,6 +80,7 @@ export function parse(data: string): CalendarEvent[] | null {
           general: generalLocation || "",
           precise: preciseLocation?.[2] || "",
         },
+        instructors,
         online: !preciseLocation && online,
       });
     });

@@ -71,7 +71,7 @@ export function toICS(schedule: CalendarEvent[], lastDay: string = getLastDay())
         startOutputType: "local",
         duration: duration(event.from, event.to),
         title: `${event.name} (${event.type.toUpperCase()})`,
-        description: event.type.toUpperCase(),
+        description: event.instructors.join(", "),
         recurrenceRule: rrule(event.days, lastDay),
         productId: "-//KENNYHUI//NONSGML kennyhui.dev//EN",
       };
